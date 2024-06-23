@@ -2,49 +2,66 @@
 #include <string>
 using namespace std;
 
-
-string encrypt(string plaintext, int shift)
+string encrypt(string text, int shift)
 {
-    string ciphertext;
+    string result;
 
-    for (char& c : plaintext)
-        {
-
+    for (char& c : text)
+    {
         if (isupper(c))
         {
             c = char(int(c + shift - 65) % 26 + 65);
         }
-
         else if (islower(c))
         {
             c = char(int(c + shift - 97) % 26 + 97);
         }
-
         else
         {
             continue;
         }
-        ciphertext += c;
+        result += c;
     }
 
-    return ciphertext;
+    return result;
 }
 
+string decrypt(string text, int shift)
+{
+    return encrypt(text, 26 - (shift % 26));
+}
 
 int main()
 {
-    string plaintext;
+    string text;
     int shift;
+    char choice;
 
-    cout << "Enter plaintext: ";
-    getline(cin, plaintext);
+    cout << "Enter 'e' for encryption or 'd' for decryption: ";
+    cin >> choice;
+    cin.ignore();
+
+    cout << "Enter text: ";
+    getline(cin, text);
 
     cout << "Enter shift (key): ";
     cin >> shift;
 
-    string encrypted = encrypt(plaintext, shift);
-    cout << "Encrypted text: " << encrypted << endl;
-
+    if (choice == 'e')
+    {
+        string encrypted = encrypt(text, shift);
+        cout << "Encrypted text: " << encrypted << endl;
+    }
+    else if (choice == 'd')
+    {
+        string decrypted = decrypt(text, shift);
+        cout << "Decrypted text: " << decrypted << endl;
+    }
+    else
+    {
+        cout << "Invalid choice!" << endl;
+    }
 
     return 0;
 }
+//dec algo added
