@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
-string encrypt(string text, int shift)
+std::string encrypt(std::string text, int shift)
 {
-    string result;
+    std::string result;
 
     for (char& c : text)
     {
@@ -26,42 +25,41 @@ string encrypt(string text, int shift)
     return result;
 }
 
-string decrypt(string text, int shift)
+std::string decrypt(std::string text, int shift)
 {
     return encrypt(text, 26 - (shift % 26));
 }
 
 int main()
 {
-    string text;
+    std::string text;
     int shift;
     char choice;
 
-    cout << "Enter 'e' for encryption or 'd' for decryption: ";
-    cin >> choice;
-    cin.ignore();
+    std::cout << "Enter 'e' for encryption or 'd' for decryption: ";
+    std::cin >> choice;
+    std::cin.ignore();
 
-    cout << "Enter text: ";
-    getline(cin, text);
+    std::cout << "Enter text: ";
+    std::getline(std::cin, text);
 
-    cout << "Enter shift (key): ";
-    cin >> shift;
+    std::cout << "Enter shift (key): ";
+    std::cin >> shift;
 
     if (choice == 'e')
     {
-        string encrypted = encrypt(text, shift);
-        cout << "Encrypted text: " << encrypted << endl;
+        std::string encrypted = encrypt(text, shift);
+        std::cout << "Encrypted text: " << encrypted << std::endl;
     }
     else if (choice == 'd')
     {
-        string decrypted = decrypt(text, shift);
-        cout << "Decrypted text: " << decrypted << endl;
+        std::string decrypted = decrypt(text, shift);
+        std::cout << "Decrypted text: " << decrypted << std::endl;
     }
     else
     {
-        cout << "Invalid choice!" << endl;
+        std::cout << "Invalid choice!" << std::endl;
     }
 
     return 0;
 }
-//dec algo added
